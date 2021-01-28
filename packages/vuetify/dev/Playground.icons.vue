@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-icon @click="foo" :set="type" :size="currentSize" :disabled="disabled" :icon="icon" aria-foo="asd" />
+    <v-icon @click="foo" :size="currentSize" :disabled="disabled" :icon="`${type}:${icon}`" aria-foo="asd" />
     <div class="box">
       <button @click="type = 'md'">material icons</button>
       <button @click="type = 'mdi'">mdi</button>
@@ -16,12 +16,15 @@
         <input type="radio" :checked="currentSize === size" @change="currentSize = size" /><label>{{ size }}</label>
       </div>
     </div>
-    <v-icon type="mdi" icon="mdi-arrow-up"/>
+    <!-- <v-icon type="mdi" icon="mdi-arrow-up"/> -->
+    <v-icon icon="mdi-close"/>
+    <!-- <v-icon :icon="AbTesting"/> -->
   </div>
 </template>
 
 <script>
   import { ref } from 'vue'
+  import { AbTesting } from 'mdue'
 
   export default {
     name: 'Playground',
@@ -45,6 +48,7 @@
           foo.value = foo.value ? null : bar
         },
         type,
+        AbTesting,
       }
     },
   }
