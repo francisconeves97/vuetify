@@ -48,7 +48,6 @@ export interface VuetifyIcons {
 
 export interface IconProps {
   tag: string
-  set: string
   icon: VuetifyIcon
   disabled?: Boolean
   class?: unknown[]
@@ -59,18 +58,17 @@ export interface IconProps {
 
 export interface IconSet {
   component: (props: IconProps) => Component
-  aliases?: Partial<VuetifyIcons>
 }
 
 export type IconOptions = {
   defaultSet: string
+  aliases?: Partial<VuetifyIcons>
   sets: Record<string, IconSet>
 }
 
 type IconInstance = {
   component: (props: IconProps) => Component
   icon: VuetifyIcon
-  set: string
 }
 
 export const VuetifyIconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
@@ -81,17 +79,24 @@ export const useIcon = (props: { icon: VuetifyIcon }) => {
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
 
   const icon: Ref<IconInstance> = computed(() => {
-    if (typeof props.icon !== 'string') {
+    let icon: VuetifyIcon | undefined = props.icon
+
+    if (typeof props.icon === 'string' && props.icon.includes('$')) {
+      icon = icons.aliases?.[props.icon.slice(props.icon.indexOf('$') + 1)]
+    }
+
+    if (!icon) throw new Error(`Could not find aliased icon ${props.icon}`)
+
+    if (typeof icon !== 'string') {
       return {
         component: iconProps => h(VComponentIcon, iconProps as any), // TODO: fix any
-        icon: props.icon,
-        set: '',
+        icon,
       }
     }
 
-    const hasSet = props.icon.includes(':')
-    const setName = hasSet ? props.icon.split(':')[0] : icons.defaultSet
-    const iconName = hasSet ? props.icon.split(':')[1] : props.icon
+    const hasSet = icon.includes(':')
+    const setName = hasSet ? icon.split(':')[0] : icons.defaultSet
+    const iconName = hasSet ? icon.split(':')[1] : icon
     const set = icons.sets[setName ?? icons.defaultSet]
 
     if (!set) {
@@ -99,20 +104,12 @@ export const useIcon = (props: { icon: VuetifyIcon }) => {
       return {
         component: () => h('div', ['error!']),
         icon: iconName,
-        set: setName,
       }
-    }
-
-    let icon: VuetifyIcon = iconName
-
-    if (iconName.startsWith('$') && set.aliases) {
-      icon = set.aliases[iconName.slice(1)] ?? icon
     }
 
     return {
       component: set.component,
-      icon,
-      set: setName,
+      icon: iconName,
     }
   })
 

@@ -21,10 +21,6 @@ export const VComponentIcon = defineComponent({
       type: String,
       required: true,
     },
-    set: {
-      type: String,
-      required: true,
-    },
   },
   setup (props) {
     return () => h(props.tag, [h(props.icon)])
@@ -40,10 +36,6 @@ export const VSvgIcon = defineComponent({
       required: true,
     },
     tag: {
-      type: String,
-      required: true,
-    },
-    set: {
       type: String,
       required: true,
     },
@@ -76,15 +68,9 @@ export const VLigatureIcon = defineComponent({
       type: String,
       required: true,
     },
-    set: {
-      type: String,
-      required: true,
-    },
   },
   setup (props) {
-    return () => h(props.tag, {
-      class: props.set,
-    }, [props.icon])
+    return () => h(props.tag, [props.icon])
   },
 })
 
@@ -99,14 +85,10 @@ export const VClassIcon = defineComponent({
       type: String,
       required: true,
     },
-    set: {
-      type: String,
-      required: true,
-    },
   },
   setup (props) {
     return () => h(props.tag, {
-      class: [props.set, props.icon],
+      class: [props.icon],
     })
   },
 })
@@ -146,7 +128,6 @@ export default defineComponent({
 
       return icon.value.component({
         tag,
-        set: icon.value.set,
         icon: icon.value.icon,
         class: [
           'v-icon',

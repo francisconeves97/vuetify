@@ -1,7 +1,7 @@
 import '@mdi/font/css/materialdesignicons.css'
 
-import { createVuetify, VLigatureIcon, VClassIcon, VSvgIcon, VComponentIcon } from 'vuetify'
-import { createApp, h } from 'vue'
+import { createVuetify, VLigatureIcon, VClassIcon, VSvgIcon } from 'vuetify'
+import { createApp, h, mergeProps } from 'vue'
 import App from './App'
 import { AbTesting } from 'mdue'
 
@@ -9,36 +9,22 @@ const app = createApp(App)
 const vuetify = createVuetify({
   icons: {
     defaultSet: 'mdi',
+    aliases: {
+      close: 'mdi-close',
+      custom: AbTesting,
+    },
     sets: {
       md: {
-        component: props => h(VLigatureIcon, { ...props, set: 'material-icons' }),
-        aliases: {
-          close: 'close',
-        },
+        component: props => h(VLigatureIcon, mergeProps(props, { class: 'material-icons' })),
       },
       mdi: {
-        component: props => h(VClassIcon, props),
-        aliases: {
-          close: 'mdi-close',
-        },
+        component: props => h(VClassIcon, mergeProps(props, { class: 'mdi' })),
       },
       'mdi-svg': {
         component: props => h(VSvgIcon, props),
-        aliases: {
-          close: 'M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z',
-        },
       },
       fa5: {
         component: props => h(VClassIcon, props),
-        aliases: {
-          close: 'fas fa-times',
-        },
-      },
-      mdue: {
-        component: props => h(VComponentIcon, props),
-        aliases: {
-          close: AbTesting,
-        },
       },
     },
   },
