@@ -14,7 +14,7 @@ export const VComponentIcon = defineComponent({
   name: 'VComponentIcon',
   props: {
     icon: {
-      type: Object as PropType<Component>,
+      type: [String, Object] as PropType<VuetifyIcon>,
       required: true,
     },
     tag: {
@@ -23,7 +23,7 @@ export const VComponentIcon = defineComponent({
     },
   },
   setup (props) {
-    return () => h(props.tag, [h(props.icon)])
+    return () => h(props.tag, [h(props.icon as Component)])
   },
 })
 
@@ -32,7 +32,7 @@ export const VSvgIcon = defineComponent({
   inheritAttrs: false,
   props: {
     icon: {
-      type: String,
+      type: [String, Object] as PropType<VuetifyIcon>,
       required: true,
     },
     tag: {
@@ -61,7 +61,7 @@ export const VLigatureIcon = defineComponent({
   name: 'VLigatureIcon',
   props: {
     icon: {
-      type: String,
+      type: [String, Object] as PropType<VuetifyIcon>,
       required: true,
     },
     tag: {
@@ -70,7 +70,7 @@ export const VLigatureIcon = defineComponent({
     },
   },
   setup (props) {
-    return () => h(props.tag, [props.icon])
+    return () => h(props.tag, [props.icon as string])
   },
 })
 
@@ -78,7 +78,7 @@ export const VClassIcon = defineComponent({
   name: 'VClassIcon',
   props: {
     icon: {
-      type: String,
+      type: [String, Object] as PropType<VuetifyIcon>,
       required: true,
     },
     tag: {

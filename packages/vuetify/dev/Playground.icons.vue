@@ -17,10 +17,12 @@
         <input type="radio" :checked="currentSize === size" @change="currentSize = size" /><label>{{ size }}</label>
       </div>
     </div>
-    <v-icon icon="mdi:mdi-arrow-up"/>
+    <!-- <v-icon icon="mdi:mdi-arrow-up"/>
     <v-icon icon="fa5:fas fa-home"/>
     <v-icon :icon="AbTesting"/>
-    <v-icon icon="$custom"/>
+    <v-icon icon="$custom"/> -->
+    <!-- <v-icon icon="home"/> -->
+    <!-- <font-awesome-icon icon="home"/> -->
   </div>
 </template>
 

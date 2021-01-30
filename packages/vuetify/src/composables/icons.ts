@@ -5,7 +5,7 @@ import { computed, h, inject } from 'vue'
 import { VComponentIcon } from '@/components'
 
 // Types
-import type { Component, InjectionKey, Ref } from 'vue'
+import type { Component, InjectionKey, Ref, VNode } from 'vue'
 
 export type VuetifyIcon = string | Component
 
@@ -57,7 +57,7 @@ export interface IconProps {
 }
 
 export interface IconSet {
-  component: (props: IconProps) => Component
+  component: (props: IconProps) => VNode
 }
 
 export type IconOptions = {
@@ -67,7 +67,7 @@ export type IconOptions = {
 }
 
 type IconInstance = {
-  component: (props: IconProps) => Component
+  component: (props: IconProps) => VNode
   icon: VuetifyIcon
 }
 
