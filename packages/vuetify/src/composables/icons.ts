@@ -7,48 +7,48 @@ import { VComponentIcon } from '@/components'
 // Types
 import type { Component, InjectionKey, Ref, VNode } from 'vue'
 
-export type VuetifyIcon = string | Component
+export type IconValue = string | Component
 
-export interface VuetifyIcons {
-  [name: string]: VuetifyIcon
-  complete: VuetifyIcon
-  cancel: VuetifyIcon
-  close: VuetifyIcon
-  delete: VuetifyIcon
-  clear: VuetifyIcon
-  success: VuetifyIcon
-  info: VuetifyIcon
-  warning: VuetifyIcon
-  error: VuetifyIcon
-  prev: VuetifyIcon
-  next: VuetifyIcon
-  checkboxOn: VuetifyIcon
-  checkboxOff: VuetifyIcon
-  checkboxIndeterminate: VuetifyIcon
-  delimiter: VuetifyIcon
-  sort: VuetifyIcon
-  expand: VuetifyIcon
-  menu: VuetifyIcon
-  subgroup: VuetifyIcon
-  dropdown: VuetifyIcon
-  radioOn: VuetifyIcon
-  radioOff: VuetifyIcon
-  edit: VuetifyIcon
-  ratingEmpty: VuetifyIcon
-  ratingFull: VuetifyIcon
-  ratingHalf: VuetifyIcon
-  loading: VuetifyIcon
-  first: VuetifyIcon
-  last: VuetifyIcon
-  unfold: VuetifyIcon
-  file: VuetifyIcon
-  plus: VuetifyIcon
-  minus: VuetifyIcon
+export interface IconAliases {
+  [name: string]: IconValue
+  complete: IconValue
+  cancel: IconValue
+  close: IconValue
+  delete: IconValue
+  clear: IconValue
+  success: IconValue
+  info: IconValue
+  warning: IconValue
+  error: IconValue
+  prev: IconValue
+  next: IconValue
+  checkboxOn: IconValue
+  checkboxOff: IconValue
+  checkboxIndeterminate: IconValue
+  delimiter: IconValue
+  sort: IconValue
+  expand: IconValue
+  menu: IconValue
+  subgroup: IconValue
+  dropdown: IconValue
+  radioOn: IconValue
+  radioOff: IconValue
+  edit: IconValue
+  ratingEmpty: IconValue
+  ratingFull: IconValue
+  ratingHalf: IconValue
+  loading: IconValue
+  first: IconValue
+  last: IconValue
+  unfold: IconValue
+  file: IconValue
+  plus: IconValue
+  minus: IconValue
 }
 
 export interface IconProps {
   tag: string
-  icon: VuetifyIcon
+  icon: IconValue
   disabled?: Boolean
   class?: unknown[]
   style?: Record<string, unknown> | null
@@ -62,24 +62,24 @@ export interface IconSet {
 
 export type IconOptions = {
   defaultSet: string
-  aliases?: Partial<VuetifyIcons>
+  aliases?: Partial<IconAliases>
   sets: Record<string, IconSet>
 }
 
 type IconInstance = {
   component: (props: IconProps) => VNode
-  icon: VuetifyIcon
+  icon: IconValue
 }
 
 export const VuetifyIconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
 
-export const useIcon = (props: { icon: VuetifyIcon }) => {
+export const useIcon = (props: { icon: IconValue }) => {
   const icons = inject(VuetifyIconSymbol)
 
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
 
   const icon: Ref<IconInstance> = computed(() => {
-    let icon: VuetifyIcon | undefined = props.icon
+    let icon: IconValue | undefined = props.icon
 
     if (typeof props.icon === 'string' && props.icon.includes('$')) {
       icon = icons.aliases?.[props.icon.slice(props.icon.indexOf('$') + 1)]

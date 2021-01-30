@@ -8,13 +8,13 @@ import makeProps from '@/util/makeProps'
 
 // Types
 import type { Component, PropType } from 'vue'
-import type { VuetifyIcon } from '@/composables/icons'
+import type { IconValue } from '@/composables/icons'
 
 export const VComponentIcon = defineComponent({
   name: 'VComponentIcon',
   props: {
     icon: {
-      type: [String, Object] as PropType<VuetifyIcon>,
+      type: [String, Object] as PropType<IconValue>,
       required: true,
     },
     tag: {
@@ -32,7 +32,7 @@ export const VSvgIcon = defineComponent({
   inheritAttrs: false,
   props: {
     icon: {
-      type: [String, Object] as PropType<VuetifyIcon>,
+      type: [String, Object] as PropType<IconValue>,
       required: true,
     },
     tag: {
@@ -61,7 +61,7 @@ export const VLigatureIcon = defineComponent({
   name: 'VLigatureIcon',
   props: {
     icon: {
-      type: [String, Object] as PropType<VuetifyIcon>,
+      type: [String, Object] as PropType<IconValue>,
       required: true,
     },
     tag: {
@@ -78,7 +78,7 @@ export const VClassIcon = defineComponent({
   name: 'VClassIcon',
   props: {
     icon: {
-      type: [String, Object] as PropType<VuetifyIcon>,
+      type: [String, Object] as PropType<IconValue>,
       required: true,
     },
     tag: {
@@ -106,7 +106,7 @@ export default defineComponent({
       default: 'i',
     },
     icon: {
-      type: [String, Object] as PropType<VuetifyIcon>,
+      type: [String, Object] as PropType<IconValue>,
       required: true,
     },
     ...makeSizeProps(),

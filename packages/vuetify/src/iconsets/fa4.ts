@@ -5,9 +5,9 @@ import { h } from 'vue'
 import { VClassIcon } from '@/components'
 
 // Types
-import type { IconSet, VuetifyIcons } from '@/composables/icons'
+import type { IconSet, IconAliases } from '@/composables/icons'
 
-const aliases: VuetifyIcons = {
+const aliases: IconAliases = {
   complete: 'fa-check',
   cancel: 'fa-times-circle',
   close: 'fa-times',
